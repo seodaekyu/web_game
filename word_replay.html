@@ -11,8 +11,6 @@
     <div>제시어: <span id="word"></span></div>
     <input type="text">
     <button>입력</button>
-    <button class="hello">버튼2</button>
-    <button class="hello">버튼3</button>
     <script>
         const number = Number(prompt('몇 명이 참가하나요?'));
         const $button = document.querySelector('button');
@@ -22,8 +20,10 @@
         let word; // 제시어
         let newWrod; // 현재 단어
 
+        $input.focus(); // 시작하면 입력 창에 포커싱 가게 설정
+
         const onClickButton = ()=>{
-            if(!word) { // 제시어가 비어 있는가?
+            if(!word || word[word.length-1] === newWord[0]) { // 제시어가 비어 있거나 입력한 단어가 올바른가?
                 word = newWord; // 입력한 단어가 제시어가 된다.
                 $word.textContent = word; // 화면에 제시어 표시
 
@@ -33,22 +33,11 @@
                 } else {
                     $order.textContent = order + 1;
                 }
-            } else { // 비어 있지 않다.
-                if(word[word.length-1] === newWrod[0]) { // 입력한 단어가 올바른가?
-                    // 올바르다.
-                    word = newWord; // 현재 단어를 제시어에 저장한다.
-                    $word.textContent = word; // 화면에 제시어 표시
-
-                    const order = Number($order.textContent)
-                    if(order +1 > number) {
-                        $order.textContent = 1;
-                    } else {
-                        $order.textContent = order + 1;
-                    }
-                } else { 
-                    // 올바르지 않다.
-                }
+            } else { // 올바르지 않다.
+                alert('올바르지 않은 단어입니다!')
             }
+            $input.value = '';
+            $input.focus();
         };
 
         const onInput = (e)=>{
