@@ -9,12 +9,12 @@
 <body>
     <div><span id="order">1</span>번째 참가자</div>
     <div>제시어: <span id="word"></span></div>
-    <input type="text">
-    <button>입력</button>
+    <input type="text" id="wordInput">
+    <button id="submitButton">입력</button>
     <script>
         const number = Number(prompt('몇 명이 참가하나요?'));
-        const $button = document.querySelector('button');
-        const $input = document.querySelector('input');
+        const $button = document.querySelector('#submitButton');
+        const $input = document.querySelector('#wordInput');
         const $word = document.querySelector('#word');
         const $order = document.querySelector('#order');
         let word; // 제시어
@@ -46,6 +46,13 @@
 
         $button.addEventListener('click', onClickButton);
         $input.addEventListener('input', onInput);
+
+        // Enter 키로 이벤트 처리 추가
+        $input.addEventListener('keydown', (e)=>{
+            if(e.key === 'Enter') {
+                onClickButton();
+            }
+        });
     </script>
 </body>
 </html>
